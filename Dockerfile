@@ -1,3 +1,4 @@
+
 FROM node:22-alpine AS frontend
 
 WORKDIR /app
@@ -61,10 +62,11 @@ RUN mkdir -p \
 
 ENV APP_ENV=production
 ENV APP_DEBUG=false
-ENV CACHE_STORE=file
+ENV CACHE_STORE=array
+ENV VIEW_COMPILED_PATH=/tmp/laravel-views
 ENV SESSION_DRIVER=cookie
 ENV QUEUE_CONNECTION=sync
 
 EXPOSE 10000
 
-CMD ["sh", "-c", "php artisan config:cache && php artisan route:cache && php artisan view:cache && php artisan serve --host=0.0.0.0 --port=${PORT:-10000}"]
+CMD ["sh", "-c", "mkdir -p /tmp/laravel-views && php artisan serve --host=0.0.0.0 --port=${PORT:-10000}"]
