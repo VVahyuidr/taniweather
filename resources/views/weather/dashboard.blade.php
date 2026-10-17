@@ -25,7 +25,7 @@
             21 Kecamatan Lombok Timur
         </span>
     </div>
-    <p class="text-slate-500 text-xs sm:text-sm mt-0.5">
+    <p class="text-slate-500 text-sm leading-[1.4] mt-0.5">
         Pantau parameter cuaca terkini dan panduan agrikultur untuk wilayah <span class="font-semibold text-slate-700">{{ $currentLocation['name'] }}</span>.
     </p>
 </div>

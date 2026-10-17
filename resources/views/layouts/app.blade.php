@@ -153,11 +153,11 @@
     <main class="flex-1 lg:pl-[264px] min-h-screen flex flex-col w-full min-w-0" id="mainContent">
 
         <!-- Top Header Bar -->
-        <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
-            <div class="flex items-center justify-between h-20 px-4 sm:px-6 lg:px-8">
+        <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm min-h-[3.5rem]">
+            <div class="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
 
                 <!-- Sisi Kiri: Tombol Menu Mobile & Judul Halaman -->
-                <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                <div class="flex items-center gap-2 sm:gap-3 lg:gap-4 min-w-0">
                     <button id="mobileMenuBtn"
                         class="lg:hidden p-2.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
                         aria-label="Buka navigasi" aria-expanded="false" aria-controls="sidebar">
@@ -172,7 +172,7 @@
                 </div>
 
                 <!-- Sisi Kanan: Searchable Location Selector, Refresh Button, & Badge Data -->
-                <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+                <div class="flex items-center gap-2 sm:gap-3 lg:gap-4 flex-shrink">
                     @if(isset($locations) && isset($locationKey))
                         <!-- Searchable Location Popover Button -->
                         <div class="relative" id="locationSelectorContainer">
@@ -309,7 +309,7 @@
         </header>
 
         <!-- Area Konten Halaman (Padding Desktop 28-36px: p-5 sm:p-7 lg:p-8) -->
-        <div class="flex-1 p-5 sm:p-7 lg:p-8 max-w-7xl w-full">
+        <div class="flex-1 p-6 sm:p-7 lg:p-8 max-w-7xl w-full">
             @yield('content')
         </div>
 
