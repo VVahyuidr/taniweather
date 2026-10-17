@@ -362,16 +362,21 @@ class OpenMeteoService
             Cache::forget($cacheKey);
         }
 
-        return Cache::remember($cacheKey, self::CACHE_TTL, function () use ($location, $locationKey) {
-            try {
-                $response = Http::timeout(10)->get(self::BASE_URL, [
-                    'latitude' => $location['latitude'],
-                    'longitude' => $location['longitude'],
-                    'current' => 'temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,rain,weather_code,wind_speed_10m,wind_direction_10m,surface_pressure',
-                    'daily' => 'temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum,precipitation_hours,precipitation_probability_max,wind_speed_10m_max,weather_code,sunrise,sunset,uv_index_max',
-                    'timezone' => 'Asia/Makassar',
-                    'forecast_days' => 7,
-                ]);
+return Cache::remember($cacheKey, self::CACHE_TTL, function () use ($location, $locationKey) {
+    try {
+        $response = Http::retry(
+            3,
+            1000,
+            fn (\Throwable $exception, $request) => true,
+            throw: false
+        )->timeout(15)->get(self::BASE_URL, [
+            'latitude' => $location['latitude'],
+            'longitude' => $location['longitude'],
+            'current' => 'temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,rain,weather_code,wind_speed_10m,wind_direction_10m,surface_pressure',
+            'daily' => 'temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum,precipitation_hours,precipitation_probability_max,wind_speed_10m_max,weather_code,sunrise,sunset,uv_index_max',
+            'timezone' => 'Asia/Makassar',
+            'forecast_days' => 7,
+        ]);
 
                 if (! $response->ok()) {
                     Log::error('Open-Meteo API error', [
