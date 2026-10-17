@@ -1,0 +1,299 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../views/**/*.blade.php';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* TaniWeather Modern Theme Colors */
+    --color-tani-navy-darker: #070D19;
+    --color-tani-navy-dark: #0B132B;
+    --color-tani-navy: #111D38;
+    --color-tani-navy-light: #1C2B4E;
+    --color-tani-navy-lighter: #283C66;
+    --color-tani-bg: #F8FAFC;
+    --color-tani-card: #FFFFFF;
+    --color-tani-border: #E2E8F0;
+    --color-tani-border-subtle: #F1F5F9;
+    --color-tani-green: #10B981;
+    --color-tani-green-light: #34D399;
+    --color-tani-green-dark: #059669;
+    --color-tani-blue: #2563EB;
+    --color-tani-blue-light: #3B82F6;
+    --color-tani-blue-dark: #1D4ED8;
+    --color-tani-cyan: #06B6D4;
+    --color-tani-cyan-light: #22D3EE;
+    --color-tani-amber: #F59E0B;
+    --color-tani-text: #0F172A;
+    --color-tani-text-secondary: #475569;
+    --color-tani-text-muted: #94A3B8;
+
+    /* Shadows */
+    --shadow-tani-card: 0 1px 3px 0 rgb(0 0 0 / 0.04), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+    --shadow-tani-card-hover: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+    --shadow-tani-hero: 0 25px 50px -12px rgba(11, 21, 39, 0.45);
+
+    /* Border Radius */
+    --radius-tani-card: 16px;
+    --radius-tani-card-lg: 20px;
+    --radius-tani-hero: 28px;
+}
+
+/* Base custom classes */
+.tani-card {
+    background-color: var(--color-tani-card);
+    border: 1px solid var(--color-tani-border);
+    border-radius: var(--radius-tani-card-lg);
+    box-shadow: var(--shadow-tani-card);
+    transition: all 200ms ease;
+}
+
+.tani-card:hover {
+    box-shadow: var(--shadow-tani-card-hover);
+}
+
+/* Hero Weather Card (Spesifikasi Referensi Utama) */
+.hero-weather-card {
+    background: linear-gradient(135deg, #0A1324 0%, #102544 50%, #1D4ED8 100%);
+    border-radius: var(--radius-tani-hero);
+    box-shadow: var(--shadow-tani-hero);
+    position: relative;
+    overflow: hidden;
+    color: #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Tekstur Garis Hujan Diagonal Sangat Halus (Background Decoration) */
+.hero-rain-texture {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: repeating-linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.035) 0px,
+        rgba(255, 255, 255, 0.035) 1px,
+        transparent 1px,
+        transparent 14px
+    );
+    z-index: 1;
+}
+
+/* Ambient Radial Glow behind Weather Illustration */
+.hero-ambient-glow {
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 60%;
+    height: 120%;
+    background: radial-gradient(circle at center, rgba(56, 189, 248, 0.18) 0%, rgba(37, 99, 235, 0.08) 50%, transparent 75%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Stat Sub-Card inside Hero */
+.hero-stat-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-tani-card);
+    padding: 1.125rem;
+    transition: background-color 200ms ease, transform 200ms ease;
+}
+
+.hero-stat-card:hover {
+    background: rgba(255, 255, 255, 0.14);
+    transform: translateY(-2px);
+}
+
+.stat-card {
+    background-color: var(--color-tani-card);
+    border: 1px solid var(--color-tani-border);
+    border-radius: var(--radius-tani-card-lg);
+    box-shadow: var(--shadow-tani-card);
+    transition: all 200ms ease;
+    padding: 1.25rem 1.5rem;
+}
+
+.stat-card:hover {
+    box-shadow: var(--shadow-tani-card-hover);
+}
+
+.chart-card {
+    background-color: var(--color-tani-card);
+    border: 1px solid var(--color-tani-border);
+    border-radius: var(--radius-tani-card-lg);
+    box-shadow: var(--shadow-tani-card);
+    padding: 1.5rem;
+}
+
+.forecast-card {
+    background-color: var(--color-tani-card);
+    border: 1px solid var(--color-tani-border);
+    border-radius: var(--radius-tani-card-lg);
+    box-shadow: var(--shadow-tani-card);
+    padding: 1.25rem;
+}
+
+/* Insight Cards */
+.insight-card {
+    background-color: var(--color-tani-card);
+    border: 1px solid var(--color-tani-border);
+    border-radius: var(--radius-tani-card-lg);
+    box-shadow: var(--shadow-tani-card);
+    transition: box-shadow 200ms;
+    padding: 1.25rem;
+    border-left-width: 5px;
+}
+
+.insight-warning {
+    border-left-color: #F59E0B;
+    background-color: #FFFBEB;
+}
+
+.insight-success {
+    border-left-color: var(--color-tani-green);
+    background-color: #ECFDF5;
+}
+
+.insight-info {
+    border-left-color: var(--color-tani-blue);
+    background-color: #EFF6FF;
+}
+
+.insight-danger {
+    border-left-color: #EF4444;
+    background-color: #FEF2F2;
+}
+
+.loading-skeleton {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    background-color: var(--color-tani-border);
+    border-radius: var(--radius-tani-card);
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: .5; }
+}
+
+.forecast-day-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 0.625rem;
+    border-radius: var(--radius-tani-card);
+    transition: all 200ms ease;
+    border: 1px solid transparent;
+}
+
+.forecast-day-item:hover {
+    background-color: var(--color-tani-border-subtle);
+    border-color: var(--color-tani-border);
+}
+
+.forecast-day-today {
+    border-color: rgba(16, 185, 129, 0.4);
+    background-color: rgba(16, 185, 129, 0.06);
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    background-color: var(--color-tani-green);
+    color: white;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border-radius: var(--radius-tani-card);
+    transition: all 200ms ease;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-tani-green-dark);
+}
+
+.btn-primary:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.35);
+}
+
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    background-color: #FFFFFF;
+    color: var(--color-tani-text);
+    font-weight: 500;
+    font-size: 0.875rem;
+    border-radius: var(--radius-tani-card);
+    border: 1px solid var(--color-tani-border);
+    transition: all 200ms ease;
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-tani-bg);
+    border-color: var(--color-tani-text-muted);
+}
+
+.dropdown-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-select {
+    appearance: none;
+    background-color: #FFFFFF;
+    border: 1px solid var(--color-tani-border);
+    color: var(--color-tani-text);
+    padding: 0.625rem 2.5rem 0.625rem 1rem;
+    border-radius: var(--radius-tani-card);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--shadow-tani-card);
+    transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.dropdown-select:focus {
+    outline: none;
+    border-color: var(--color-tani-green);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+}
+
+.dropdown-icon {
+    position: absolute;
+    inset-block: 0;
+    right: 0.875rem;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+    color: var(--color-tani-text-muted);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 0.375rem;
+    height: 0.375rem;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #CBD5E1;
+    border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #94A3B8;
+}

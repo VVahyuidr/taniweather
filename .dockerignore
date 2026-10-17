@@ -1,0 +1,16 @@
+.git
+.env
+.env.*
+!.env.example
+.mcp.json
+.claude
+.codex
+AGENTS.md
+CLAUDE.md
+node_modules
+vendor
+public/hot
+storage/logs/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
